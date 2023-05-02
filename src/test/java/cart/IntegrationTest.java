@@ -2,25 +2,19 @@ package cart;
 
 import static io.restassured.RestAssured.given;
 
-import cart.service.ProductService;
 import cart.service.dto.ProductRequest;
 import io.restassured.RestAssured;
 import org.apache.catalina.connector.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.jdbc.Sql;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class IntegrationTest {
-
-    @Autowired
-    private ProductService productService;
 
     @LocalServerPort
     private int port;
@@ -69,7 +63,6 @@ class IntegrationTest {
                 .statusCode(Response.SC_BAD_REQUEST);
     }
 
-    @Sql("/test-fixture.sql")
     @Test
     @DisplayName("상품 수정 테스트")
     void editProduct() {
@@ -85,7 +78,6 @@ class IntegrationTest {
                 .statusCode(200);
     }
 
-    @Sql("/test-fixture.sql")
     @Test
     @DisplayName("상품 삭제 테스트")
     void deleteProduct() {
